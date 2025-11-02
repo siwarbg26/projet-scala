@@ -1,4 +1,4 @@
-// Generated from C:/Users/siwar/Desktop/compil tp/TP1-3_Final/src/parserANTLR/PCF.g4 by ANTLR 4.13.2
+// Generated from E:/IMT/FISE_A3_LOGIN/COMPIL/Projet_PCF_Final/projet-scala/src/parserANTLR/PCF.g4 by ANTLR 4.13.2
 package parserANTLR;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -28,6 +28,12 @@ public interface PCFVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunExp(PCFParser.FunExpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PCFParser#fixExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFixExp(PCFParser.FixExpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PCFParser#ifzExp}.
 	 * @param ctx the parse tree

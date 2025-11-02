@@ -2,12 +2,15 @@ grammar PCF;
 
 term : letExp
      | funExp
+     | fixExp
      | addSub
      ;
 
 letExp : LET ID EQUALS term IN term ;
 
 funExp : FUN ID ARROW term ;
+
+fixExp : FIX ID term ;
 
 ifzExp : IFZ term THEN term ELSE term ;
 
@@ -29,6 +32,7 @@ primary : NUMBER
 LET    : 'let' ;
 IN     : 'in' ;
 FUN    : 'fun' ;
+FIX    : 'fix' ;
 ARROW  : '->' ;
 IFZ    : 'ifz' ;
 THEN   : 'then' ;

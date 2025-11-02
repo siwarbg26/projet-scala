@@ -18,3 +18,4 @@ enum Token:
   case ELSE
   case FUN
   case ARROW
+  case FIX

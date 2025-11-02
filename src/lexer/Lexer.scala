@@ -51,5 +51,6 @@ object Lexer:
             case "then" => THEN
             case "else" => ELSE
             case "fun" => FUN
+            case "fix" => FIX
             case id => IDENT(id)
         case c => throw new Exception(s"Unexpected character: $c, ascii ${c.toInt}")

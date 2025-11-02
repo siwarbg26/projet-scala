@@ -1,4 +1,4 @@
-// Generated from C:/Users/siwar/Desktop/compil tp/TP1-3_Final/src/parserANTLR/PCF.g4 by ANTLR 4.13.2
+// Generated from E:/IMT/FISE_A3_LOGIN/COMPIL/Projet_PCF_Final/projet-scala/src/parserANTLR/PCF.g4 by ANTLR 4.13.2
 package parserANTLR;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -37,6 +37,16 @@ public interface PCFListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunExp(PCFParser.FunExpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PCFParser#fixExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFixExp(PCFParser.FixExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PCFParser#fixExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFixExp(PCFParser.FixExpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PCFParser#ifzExp}.
 	 * @param ctx the parse tree
