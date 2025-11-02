@@ -53,6 +53,18 @@ public class PCFBaseListener implements PCFListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFixExp(PCFParser.FixExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFixExp(PCFParser.FixExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIfzExp(PCFParser.IfzExpContext ctx) { }
 	/**
 	 * {@inheritDoc}

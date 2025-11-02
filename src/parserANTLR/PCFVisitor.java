@@ -29,6 +29,12 @@ public interface PCFVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunExp(PCFParser.FunExpContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PCFParser#fixExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFixExp(PCFParser.FixExpContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PCFParser#ifzExp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -7,11 +7,21 @@ import ast.Op.*
 
 class ASTVisitor[AST] extends PCFBaseVisitor[AST]:
 
+  override def visitFixExp(ctx: PCFParser.FixExpContext): AST =
+    val name = ctx.ID().getText
+    val body = visit(ctx.term()).asInstanceOf[Term]
+    Fix(name, body).asInstanceOf[AST]
+
   override def visitTerm(ctx: PCFParser.TermContext): AST =
     if ctx.letExp() != null then
       visit(ctx.letExp())
+    else if ctx.funExp() != null then
+      visit(ctx.funExp())
+    else if ctx.fixExp() != null then // ← Ajoutez cette condition
+      visit(ctx.fixExp())
     else
       visit(ctx.addSub())
+
 
   override def visitFunExp(ctx: PCFParser.FunExpContext): AST =
     val param = ctx.ID().getText

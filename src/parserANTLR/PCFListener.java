@@ -38,6 +38,16 @@ public interface PCFListener extends ParseTreeListener {
 	 */
 	void exitFunExp(PCFParser.FunExpContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PCFParser#fixExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFixExp(PCFParser.FixExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PCFParser#fixExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFixExp(PCFParser.FixExpContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PCFParser#ifzExp}.
 	 * @param ctx the parse tree
 	 */
