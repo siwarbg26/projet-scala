@@ -1,6 +1,7 @@
 package PCF
 
 import evaluator.Evaluator.eval
+import evaluator.Evaluator.Value.*
 import scala.io.StdIn
 import java.io.{FileInputStream, InputStream, ByteArrayInputStream}
 import lexer.Lexer
@@ -20,4 +21,8 @@ object PCF:
     val token = Lexer.nextToken()
     if token != lexer.Token.EOF then
       throw new Exception(s"Unexpected token $token after parsing complete expression $exp")
-    println(s"==> ${eval(exp)}")
+
+    val result = eval(exp)
+    result match
+      case IntValue(n) => println(s"==> $n")
+      case Closure(_, _, _) => println("==> <function>")

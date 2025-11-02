@@ -1,47 +1,58 @@
 package evaluator
 
 import ast.Term
-import ast.Term.*
+import Term.*
 import ast.Op.*
 
 object Evaluator:
-  def eval(t: Term, env: Map[String, Term] = Map()): Int =
-    t match
-      case Number(value) => value
+
+  // Type de retour : peut être un entier ou une fermeture
+  enum Value:
+    case IntValue(n: Int)
+    case Closure(param: String, body: Term, env: Map[String, Value])
+
+  import Value.*
+
+  def eval(term: Term, env: Map[String, Value] = Map()): Value =
+    term match
+      case Number(value) =>
+        IntValue(value)
+
+      case Var(name) =>
+        env.getOrElse(name, throw new Exception(s"Variable non définie: $name"))
 
       case BinaryTerm(op, exp1, exp2) =>
         val v1 = eval(exp1, env)
         val v2 = eval(exp2, env)
-        op match
-          case Plus => v1 + v2
-          case Minus => v1 - v2
-          case Times => v1 * v2
-          case Div => v1 / v2
+        (v1, v2) match
+          case (IntValue(n1), IntValue(n2)) =>
+            val result = op match
+              case Plus => n1 + n2
+              case Minus => n1 - n2
+              case Times => n1 * n2
+              case Div if n2 != 0 => n1 / n2
+              case Div => throw new Exception("Division by zero")
+            IntValue(result)
+          case _ =>
+            throw new Exception(s"Cannot apply $op to non-integers")
 
       case IfZero(cond, zBranch, nzBranch) =>
-        if eval(cond, env) == 0 then
-          eval(zBranch, env)
-        else
-          eval(nzBranch, env)
-
-      case Var(name) =>
-        env.get(name) match
-          case Some(Number(value)) => value
-          case Some(_) => throw new Exception(s"Variable $name is not a number")
-          case None => throw new Exception(s"Undefined variable: $name")
+        eval(cond, env) match
+          case IntValue(0) => eval(zBranch, env)
+          case IntValue(_) => eval(nzBranch, env)
+          case _ => throw new Exception("ifz condition must evaluate to an integer")
 
       case Let(name, value, body) =>
-        val evaluatedValue = eval(value, env)
-        eval(body, env + (name -> Number(evaluatedValue)))
+        val v = eval(value, env)
+        eval(body, env + (name -> v))
 
-      case Fun(_, _) =>
-        throw new Exception("Cannot evaluate a function to an integer")
+      case Fun(param, body) =>
+        Closure(param, body, env)  // ← Retourne une fermeture
 
       case App(func, arg) =>
-        val argValue = Number(eval(arg, env))  // ← Évalue l'argument
-        func match
-          case Fun(param, body) =>
-            eval(body, env + (param -> argValue))  // ← Substitue le paramètre
+        val argValue = eval(arg, env)
+        eval(func, env) match
+          case Closure(param, body, closureEnv) =>
+            eval(body, closureEnv + (param -> argValue))
           case _ =>
-            val funcValue = eval(func, env)
-            throw new Exception(s"Cannot apply non-function: $funcValue")
+            throw new Exception("Cannot apply non-function")
