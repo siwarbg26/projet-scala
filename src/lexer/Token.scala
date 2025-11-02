@@ -10,5 +10,7 @@ enum Token:
   case DIVIDE
   case IFZ
   case EOF 
-  case LET, IN
+  case LET
+  case IN
   case IDENT(name: String)
+  case EQUALS

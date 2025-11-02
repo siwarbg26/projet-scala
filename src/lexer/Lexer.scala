@@ -13,34 +13,34 @@ object Lexer:
 
   private def nextChar(): Unit = currentChar = input.read()
 
-  private def lexer$Lexer$$nextToken(): Token =
+  def nextToken(): Token =
     while currentChar != -1 && currentChar.toChar.isWhitespace do nextChar()
     if currentChar == -1 then EOF
-    else currentChar.toChar match
-      case '(' => nextChar(); LPAR
-      case ')' => nextChar(); RPAR
-      case '+' => nextChar(); PLUS
-      case '-' => nextChar(); MINUS
-      case '*' => nextChar(); MULTIPLY
-      case '/' => nextChar(); DIVIDE
-      case d if d.isDigit =>
-        var value = d - '0'
-        nextChar()
-        while currentChar != -1 && currentChar.toChar.isDigit do
-          value = value * 10 + (currentChar - '0')
+    else
+      currentChar.toChar match
+        case '(' => nextChar(); LPAR
+        case ')' => nextChar(); RPAR
+        case '+' => nextChar(); PLUS
+        case '-' => nextChar(); MINUS
+        case '*' => nextChar(); MULTIPLY
+        case '/' => nextChar(); DIVIDE
+        case '=' => nextChar(); EQUALS
+        case d if d.isDigit =>
+          var value = d - '0'
           nextChar()
-        NUMBER(value)
-      case c if c.isLetter =>
-        var name = StringBuilder(c.toString)
-        nextChar()
-        while currentChar != -1 && currentChar.toChar.isLetterOrDigit do
-          name.append(currentChar.toChar)
+          while currentChar != -1 && currentChar.toChar.isDigit do
+            value = value * 10 + (currentChar - '0')
+            nextChar()
+          NUMBER(value)
+        case c if c.isLetter =>
+          var name = StringBuilder(c.toString)
           nextChar()
-        name.toString match
-          case "let" => LET
-          case "in" => IN
-          case "ifz" => IFZ
-          case id => IDENT(id)
-      case c => throw new Exception(s"Unexpected character: $c, ascii ${c.toInt}")
-
-  def nextToken(): Token = lexer$Lexer$$nextToken()
+          while currentChar != -1 && currentChar.toChar.isLetterOrDigit do
+            name.append(currentChar.toChar)
+            nextChar()
+          name.toString() match
+            case "let" => LET
+            case "in" => IN
+            case "ifz" => IFZ
+            case id => IDENT(id)
+        case c => throw new Exception(s"Unexpected character: $c, ascii ${c.toInt}")
