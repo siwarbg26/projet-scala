@@ -13,6 +13,19 @@ class ASTVisitor[AST] extends PCFBaseVisitor[AST]:
     else
       visit(ctx.addSub())
 
+  override def visitFunExp(ctx: PCFParser.FunExpContext): AST =
+    val param = ctx.ID().getText
+    val body = visit(ctx.term()).asInstanceOf[Term]
+    Fun(param, body).asInstanceOf[AST]
+
+  override def visitApp(ctx: PCFParser.AppContext): AST =
+    var result = visit(ctx.mulDiv(0)).asInstanceOf[Term]
+    for i <- 1 until ctx.mulDiv().size() do
+      val arg = visit(ctx.mulDiv(i)).asInstanceOf[Term]
+      result = App(result, arg)
+    result.asInstanceOf[AST]
+
+
   override def visitLetExp(ctx: PCFParser.LetExpContext): AST =
     val name = ctx.ID().getText
     val value = visit(ctx.term(0)).asInstanceOf[Term]
@@ -26,12 +39,13 @@ class ASTVisitor[AST] extends PCFBaseVisitor[AST]:
     IfZero(cond, thenBranch, elseBranch).asInstanceOf[AST]
 
   override def visitAddSub(ctx: PCFParser.AddSubContext): AST =
-    var result = visit(ctx.mulDiv(0)).asInstanceOf[Term]
-    for i <- 1 until ctx.mulDiv().size() do
+    var result = visit(ctx.app(0)).asInstanceOf[Term]
+    for i <- 1 until ctx.app().size() do
       val op = if ctx.PLUS(i - 1) != null then Plus else Minus
-      val right = visit(ctx.mulDiv(i)).asInstanceOf[Term]
+      val right = visit(ctx.app(i)).asInstanceOf[Term]
       result = BinaryTerm(op, result, right)
     result.asInstanceOf[AST]
+
 
   override def visitMulDiv(ctx: PCFParser.MulDivContext): AST =
     var result = visit(ctx.primary(0)).asInstanceOf[Term]

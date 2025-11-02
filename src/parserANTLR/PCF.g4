@@ -1,14 +1,19 @@
 grammar PCF;
 
 term : letExp
+     | funExp
      | addSub
      ;
 
 letExp : LET ID EQUALS term IN term ;
 
+funExp : FUN ID ARROW term ;
+
 ifzExp : IFZ term THEN term ELSE term ;
 
-addSub : mulDiv ((PLUS | MINUS) mulDiv)* ;
+addSub : app ((PLUS | MINUS) app)* ;
+
+app : mulDiv (mulDiv)* ;
 
 mulDiv : primary ((TIMES | DIV) primary)* ;
 
@@ -20,9 +25,11 @@ primary : NUMBER
         | LPAR (PLUS | MINUS | TIMES | DIV) term term RPAR
         ;
 
-// Tokens (mots-clés avant ID)
+// Tokens
 LET    : 'let' ;
 IN     : 'in' ;
+FUN    : 'fun' ;
+ARROW  : '->' ;
 IFZ    : 'ifz' ;
 THEN   : 'then' ;
 ELSE   : 'else' ;

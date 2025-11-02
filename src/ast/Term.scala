@@ -6,6 +6,8 @@ enum Term:
   case BinaryTerm(op: Op, exp1: Term, exp2: Term)
   case Var(name: String)
   case Let(name: String, t1: Term, t2: Term)
+  case Fun(param: String, body: Term) // ← Nouveau
+  case App(func: Term, arg: Term)
 
 enum Op:
   case Plus

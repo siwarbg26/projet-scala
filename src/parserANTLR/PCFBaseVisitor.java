@@ -32,6 +32,13 @@ public class PCFBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements PC
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitFunExp(PCFParser.FunExpContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitIfzExp(PCFParser.IfzExpContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -40,6 +47,13 @@ public class PCFBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements PC
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitAddSub(PCFParser.AddSubContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitApp(PCFParser.AppContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

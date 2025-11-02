@@ -18,8 +18,36 @@ object Parser:
   private def parseExpr(): Term =
     currentToken match
       case LET => parseLetInfix()
+      case FUN => parseFun()
       case IFZ => parseIfzInfix()
-      case _ => parseAddSub()
+      case _ => parseApp()
+
+  // Parse une fonction anonyme : fun x -> x + 1
+  private def parseFun(): Term =
+    currentToken = nextToken()
+    val param = currentToken match
+      case IDENT(name) => name
+      case _ => throw new Exception(s"Expected parameter name, got: $currentToken")
+
+    currentToken = nextToken()
+    if currentToken != ARROW then
+      throw new Exception(s"Expected '->', got: $currentToken")
+
+    currentToken = nextToken()
+    val body = parseExpr() // ← fun associatif à droite
+
+    Fun(param, body)
+
+  // Parse application (priorité haute, associatif à gauche)
+  private def parseApp(): Term =
+    var left = parseAddSub()
+    while currentToken match
+      case NUMBER(_) | IDENT(_) | LPAR => true
+      case _ => false
+    do
+      val arg = parseAddSub()
+      left = App(left, arg)
+    left   
 
   // Parse un ifz en syntaxe infixe
   private def parseIfzInfix(): Term =

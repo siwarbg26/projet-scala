@@ -23,6 +23,12 @@ public interface PCFVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLetExp(PCFParser.LetExpContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PCFParser#funExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunExp(PCFParser.FunExpContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PCFParser#ifzExp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -34,6 +40,12 @@ public interface PCFVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAddSub(PCFParser.AddSubContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PCFParser#app}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitApp(PCFParser.AppContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PCFParser#mulDiv}.
 	 * @param ctx the parse tree

@@ -21,7 +21,13 @@ object Lexer:
         case '(' => nextChar(); LPAR
         case ')' => nextChar(); RPAR
         case '+' => nextChar(); PLUS
-        case '-' => nextChar(); MINUS
+        case '-' =>
+          nextChar()
+          if currentChar == '>' then  // ← Détecte ->
+            nextChar()
+            ARROW
+          else
+            MINUS
         case '*' => nextChar(); MULTIPLY
         case '/' => nextChar(); DIVIDE
         case '=' => nextChar(); EQUALS
@@ -44,5 +50,6 @@ object Lexer:
             case "ifz" => IFZ
             case "then" => THEN
             case "else" => ELSE
+            case "fun" => FUN
             case id => IDENT(id)
         case c => throw new Exception(s"Unexpected character: $c, ascii ${c.toInt}")

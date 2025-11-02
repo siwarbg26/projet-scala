@@ -41,6 +41,18 @@ public class PCFBaseListener implements PCFListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunExp(PCFParser.FunExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunExp(PCFParser.FunExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIfzExp(PCFParser.IfzExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -60,6 +72,18 @@ public class PCFBaseListener implements PCFListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAddSub(PCFParser.AddSubContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterApp(PCFParser.AppContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitApp(PCFParser.AppContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

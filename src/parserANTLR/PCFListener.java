@@ -28,6 +28,16 @@ public interface PCFListener extends ParseTreeListener {
 	 */
 	void exitLetExp(PCFParser.LetExpContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PCFParser#funExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunExp(PCFParser.FunExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PCFParser#funExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunExp(PCFParser.FunExpContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PCFParser#ifzExp}.
 	 * @param ctx the parse tree
 	 */
@@ -47,6 +57,16 @@ public interface PCFListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAddSub(PCFParser.AddSubContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PCFParser#app}.
+	 * @param ctx the parse tree
+	 */
+	void enterApp(PCFParser.AppContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PCFParser#app}.
+	 * @param ctx the parse tree
+	 */
+	void exitApp(PCFParser.AppContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PCFParser#mulDiv}.
 	 * @param ctx the parse tree
