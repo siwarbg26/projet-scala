@@ -1,4 +1,4 @@
-// Generated from C:/Users/siwar/Desktop/compil tp/TP1-3_Final/src/parserANTLR/PCF.g4 by ANTLR 4.13.2
+// Generated from E:/IMT/FISE_A3_LOGIN/COMPIL/Projet_PCF_Final/projet-scala/src/parserANTLR/PCF.g4 by ANTLR 4.13.2
 package parserANTLR;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -17,7 +17,7 @@ public class PCFLexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		LET=1, IN=2, FIX=3, FUN=4, ARROW=5, IFZ=6, THEN=7, ELSE=8, EQUALS=9, PLUS=10, 
+		LET=1, IN=2, FUN=3, FIX=4, ARROW=5, IFZ=6, THEN=7, ELSE=8, EQUALS=9, PLUS=10, 
 		MINUS=11, TIMES=12, DIV=13, LPAR=14, RPAR=15, NUMBER=16, ID=17, WS=18;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
@@ -29,7 +29,7 @@ public class PCFLexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"LET", "IN", "FIX", "FUN", "ARROW", "IFZ", "THEN", "ELSE", "EQUALS", 
+			"LET", "IN", "FUN", "FIX", "ARROW", "IFZ", "THEN", "ELSE", "EQUALS", 
 			"PLUS", "MINUS", "TIMES", "DIV", "LPAR", "RPAR", "NUMBER", "ID", "WS"
 		};
 	}
@@ -37,14 +37,14 @@ public class PCFLexer extends Lexer {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'let'", "'in'", "'fix'", "'fun'", "'->'", "'ifz'", "'then'", "'else'", 
+			null, "'let'", "'in'", "'fun'", "'fix'", "'->'", "'ifz'", "'then'", "'else'", 
 			"'='", "'+'", "'-'", "'*'", "'/'", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "LET", "IN", "FIX", "FUN", "ARROW", "IFZ", "THEN", "ELSE", "EQUALS", 
+			null, "LET", "IN", "FUN", "FIX", "ARROW", "IFZ", "THEN", "ELSE", "EQUALS", 
 			"PLUS", "MINUS", "TIMES", "DIV", "LPAR", "RPAR", "NUMBER", "ID", "WS"
 		};
 	}
@@ -145,9 +145,9 @@ public class PCFLexer extends Lexer {
 		"T\u0001\u0000\u0000\u0000!X\u0001\u0000\u0000\u0000#`\u0001\u0000\u0000"+
 		"\u0000%&\u0005l\u0000\u0000&\'\u0005e\u0000\u0000\'(\u0005t\u0000\u0000"+
 		"(\u0002\u0001\u0000\u0000\u0000)*\u0005i\u0000\u0000*+\u0005n\u0000\u0000"+
-		"+\u0004\u0001\u0000\u0000\u0000,-\u0005f\u0000\u0000-.\u0005i\u0000\u0000"+
-		"./\u0005x\u0000\u0000/\u0006\u0001\u0000\u0000\u000001\u0005f\u0000\u0000"+
-		"12\u0005u\u0000\u000023\u0005n\u0000\u00003\b\u0001\u0000\u0000\u0000"+
+		"+\u0004\u0001\u0000\u0000\u0000,-\u0005f\u0000\u0000-.\u0005u\u0000\u0000"+
+		"./\u0005n\u0000\u0000/\u0006\u0001\u0000\u0000\u000001\u0005f\u0000\u0000"+
+		"12\u0005i\u0000\u000023\u0005x\u0000\u00003\b\u0001\u0000\u0000\u0000"+
 		"45\u0005-\u0000\u000056\u0005>\u0000\u00006\n\u0001\u0000\u0000\u0000"+
 		"78\u0005i\u0000\u000089\u0005f\u0000\u00009:\u0005z\u0000\u0000:\f\u0001"+
 		"\u0000\u0000\u0000;<\u0005t\u0000\u0000<=\u0005h\u0000\u0000=>\u0005e"+

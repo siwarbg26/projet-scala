@@ -1,4 +1,4 @@
-// Generated from C:/Users/siwar/Desktop/compil tp/TP1-3_Final/src/parserANTLR/PCF.g4 by ANTLR 4.13.2
+// Generated from E:/IMT/FISE_A3_LOGIN/COMPIL/Projet_PCF_Final/projet-scala/src/parserANTLR/PCF.g4 by ANTLR 4.13.2
 package parserANTLR;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -17,7 +17,7 @@ public class PCFParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		LET=1, IN=2, FIX=3, FUN=4, ARROW=5, IFZ=6, THEN=7, ELSE=8, EQUALS=9, PLUS=10, 
+		LET=1, IN=2, FUN=3, FIX=4, ARROW=5, IFZ=6, THEN=7, ELSE=8, EQUALS=9, PLUS=10, 
 		MINUS=11, TIMES=12, DIV=13, LPAR=14, RPAR=15, NUMBER=16, ID=17, WS=18;
 	public static final int
 		RULE_term = 0, RULE_letExp = 1, RULE_funExp = 2, RULE_fixExp = 3, RULE_ifzExp = 4, 
@@ -32,14 +32,14 @@ public class PCFParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'let'", "'in'", "'fix'", "'fun'", "'->'", "'ifz'", "'then'", "'else'", 
+			null, "'let'", "'in'", "'fun'", "'fix'", "'->'", "'ifz'", "'then'", "'else'", 
 			"'='", "'+'", "'-'", "'*'", "'/'", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "LET", "IN", "FIX", "FUN", "ARROW", "IFZ", "THEN", "ELSE", "EQUALS", 
+			null, "LET", "IN", "FUN", "FIX", "ARROW", "IFZ", "THEN", "ELSE", "EQUALS", 
 			"PLUS", "MINUS", "TIMES", "DIV", "LPAR", "RPAR", "NUMBER", "ID", "WS"
 		};
 	}
@@ -133,35 +133,40 @@ public class PCFParser extends Parser {
 		try {
 			setState(22);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case LET:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(18);
 				letExp();
 				}
 				break;
-			case 2:
+			case FUN:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(19);
 				funExp();
 				}
 				break;
-			case 3:
+			case FIX:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(20);
 				fixExp();
 				}
 				break;
-			case 4:
+			case IFZ:
+			case LPAR:
+			case NUMBER:
+			case ID:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(21);
 				addSub();
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -643,9 +648,6 @@ public class PCFParser extends Parser {
 		public IfzExpContext ifzExp() {
 			return getRuleContext(IfzExpContext.class,0);
 		}
-		public FunExpContext funExp() {
-			return getRuleContext(FunExpContext.class,0);
-		}
 		public TerminalNode LPAR() { return getToken(PCFParser.LPAR, 0); }
 		public List<TermContext> term() {
 			return getRuleContexts(TermContext.class);
@@ -685,7 +687,7 @@ public class PCFParser extends Parser {
 		enterRule(_localctx, 16, RULE_primary);
 		int _la;
 		try {
-			setState(93);
+			setState(92);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
@@ -713,47 +715,40 @@ public class PCFParser extends Parser {
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(73);
-				funExp();
+				match(LPAR);
+				setState(74);
+				term();
+				setState(75);
+				match(RPAR);
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(74);
+				setState(77);
 				match(LPAR);
-				setState(75);
+				setState(78);
+				match(IFZ);
+				setState(79);
 				term();
-				setState(76);
+				setState(80);
+				match(THEN);
+				setState(81);
+				term();
+				setState(82);
+				match(ELSE);
+				setState(83);
+				term();
+				setState(84);
 				match(RPAR);
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(78);
+				setState(86);
 				match(LPAR);
-				setState(79);
-				match(IFZ);
-				setState(80);
-				term();
-				setState(81);
-				match(THEN);
-				setState(82);
-				term();
-				setState(83);
-				match(ELSE);
-				setState(84);
-				term();
-				setState(85);
-				match(RPAR);
-				}
-				break;
-			case 7:
-				enterOuterAlt(_localctx, 7);
-				{
 				setState(87);
-				match(LPAR);
-				setState(88);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 15360L) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -763,11 +758,11 @@ public class PCFParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
+				setState(88);
+				term();
 				setState(89);
 				term();
 				setState(90);
-				term();
-				setState(91);
 				match(RPAR);
 				}
 				break;
@@ -785,7 +780,7 @@ public class PCFParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0012`\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u0012_\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0003\u0000"+
@@ -798,23 +793,23 @@ public class PCFParser extends Parser {
 		"=\t\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0005\u0007B\b\u0007\n\u0007"+
 		"\f\u0007E\t\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
 		"\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
-		"\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0003\b^\b"+
-		"\b\u0001\b\u0000\u0000\t\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0000"+
-		"\u0003\u0001\u0000\n\u000b\u0001\u0000\f\r\u0001\u0000\n\rb\u0000\u0016"+
-		"\u0001\u0000\u0000\u0000\u0002\u0018\u0001\u0000\u0000\u0000\u0004\u001f"+
-		"\u0001\u0000\u0000\u0000\u0006$\u0001\u0000\u0000\u0000\b(\u0001\u0000"+
-		"\u0000\u0000\n/\u0001\u0000\u0000\u0000\f7\u0001\u0000\u0000\u0000\u000e"+
-		">\u0001\u0000\u0000\u0000\u0010]\u0001\u0000\u0000\u0000\u0012\u0017\u0003"+
-		"\u0002\u0001\u0000\u0013\u0017\u0003\u0004\u0002\u0000\u0014\u0017\u0003"+
-		"\u0006\u0003\u0000\u0015\u0017\u0003\n\u0005\u0000\u0016\u0012\u0001\u0000"+
-		"\u0000\u0000\u0016\u0013\u0001\u0000\u0000\u0000\u0016\u0014\u0001\u0000"+
-		"\u0000\u0000\u0016\u0015\u0001\u0000\u0000\u0000\u0017\u0001\u0001\u0000"+
-		"\u0000\u0000\u0018\u0019\u0005\u0001\u0000\u0000\u0019\u001a\u0005\u0011"+
-		"\u0000\u0000\u001a\u001b\u0005\t\u0000\u0000\u001b\u001c\u0003\u0000\u0000"+
-		"\u0000\u001c\u001d\u0005\u0002\u0000\u0000\u001d\u001e\u0003\u0000\u0000"+
-		"\u0000\u001e\u0003\u0001\u0000\u0000\u0000\u001f \u0005\u0004\u0000\u0000"+
-		" !\u0005\u0011\u0000\u0000!\"\u0005\u0005\u0000\u0000\"#\u0003\u0000\u0000"+
-		"\u0000#\u0005\u0001\u0000\u0000\u0000$%\u0005\u0003\u0000\u0000%&\u0005"+
+		"\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0003\b]\b\b\u0001"+
+		"\b\u0000\u0000\t\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0000\u0003"+
+		"\u0001\u0000\n\u000b\u0001\u0000\f\r\u0001\u0000\n\r`\u0000\u0016\u0001"+
+		"\u0000\u0000\u0000\u0002\u0018\u0001\u0000\u0000\u0000\u0004\u001f\u0001"+
+		"\u0000\u0000\u0000\u0006$\u0001\u0000\u0000\u0000\b(\u0001\u0000\u0000"+
+		"\u0000\n/\u0001\u0000\u0000\u0000\f7\u0001\u0000\u0000\u0000\u000e>\u0001"+
+		"\u0000\u0000\u0000\u0010\\\u0001\u0000\u0000\u0000\u0012\u0017\u0003\u0002"+
+		"\u0001\u0000\u0013\u0017\u0003\u0004\u0002\u0000\u0014\u0017\u0003\u0006"+
+		"\u0003\u0000\u0015\u0017\u0003\n\u0005\u0000\u0016\u0012\u0001\u0000\u0000"+
+		"\u0000\u0016\u0013\u0001\u0000\u0000\u0000\u0016\u0014\u0001\u0000\u0000"+
+		"\u0000\u0016\u0015\u0001\u0000\u0000\u0000\u0017\u0001\u0001\u0000\u0000"+
+		"\u0000\u0018\u0019\u0005\u0001\u0000\u0000\u0019\u001a\u0005\u0011\u0000"+
+		"\u0000\u001a\u001b\u0005\t\u0000\u0000\u001b\u001c\u0003\u0000\u0000\u0000"+
+		"\u001c\u001d\u0005\u0002\u0000\u0000\u001d\u001e\u0003\u0000\u0000\u0000"+
+		"\u001e\u0003\u0001\u0000\u0000\u0000\u001f \u0005\u0003\u0000\u0000 !"+
+		"\u0005\u0011\u0000\u0000!\"\u0005\u0005\u0000\u0000\"#\u0003\u0000\u0000"+
+		"\u0000#\u0005\u0001\u0000\u0000\u0000$%\u0005\u0004\u0000\u0000%&\u0005"+
 		"\u0011\u0000\u0000&\'\u0003\u0000\u0000\u0000\'\u0007\u0001\u0000\u0000"+
 		"\u0000()\u0005\u0006\u0000\u0000)*\u0003\u0000\u0000\u0000*+\u0005\u0007"+
 		"\u0000\u0000+,\u0003\u0000\u0000\u0000,-\u0005\b\u0000\u0000-.\u0003\u0000"+
@@ -828,18 +823,17 @@ public class PCFParser extends Parser {
 		"\u0000?@\u0007\u0001\u0000\u0000@B\u0003\u0010\b\u0000A?\u0001\u0000\u0000"+
 		"\u0000BE\u0001\u0000\u0000\u0000CA\u0001\u0000\u0000\u0000CD\u0001\u0000"+
 		"\u0000\u0000D\u000f\u0001\u0000\u0000\u0000EC\u0001\u0000\u0000\u0000"+
-		"F^\u0005\u0010\u0000\u0000G^\u0005\u0011\u0000\u0000H^\u0003\b\u0004\u0000"+
-		"I^\u0003\u0004\u0002\u0000JK\u0005\u000e\u0000\u0000KL\u0003\u0000\u0000"+
-		"\u0000LM\u0005\u000f\u0000\u0000M^\u0001\u0000\u0000\u0000NO\u0005\u000e"+
-		"\u0000\u0000OP\u0005\u0006\u0000\u0000PQ\u0003\u0000\u0000\u0000QR\u0005"+
-		"\u0007\u0000\u0000RS\u0003\u0000\u0000\u0000ST\u0005\b\u0000\u0000TU\u0003"+
-		"\u0000\u0000\u0000UV\u0005\u000f\u0000\u0000V^\u0001\u0000\u0000\u0000"+
-		"WX\u0005\u000e\u0000\u0000XY\u0007\u0002\u0000\u0000YZ\u0003\u0000\u0000"+
-		"\u0000Z[\u0003\u0000\u0000\u0000[\\\u0005\u000f\u0000\u0000\\^\u0001\u0000"+
-		"\u0000\u0000]F\u0001\u0000\u0000\u0000]G\u0001\u0000\u0000\u0000]H\u0001"+
-		"\u0000\u0000\u0000]I\u0001\u0000\u0000\u0000]J\u0001\u0000\u0000\u0000"+
-		"]N\u0001\u0000\u0000\u0000]W\u0001\u0000\u0000\u0000^\u0011\u0001\u0000"+
-		"\u0000\u0000\u0005\u00164;C]";
+		"F]\u0005\u0010\u0000\u0000G]\u0005\u0011\u0000\u0000H]\u0003\b\u0004\u0000"+
+		"IJ\u0005\u000e\u0000\u0000JK\u0003\u0000\u0000\u0000KL\u0005\u000f\u0000"+
+		"\u0000L]\u0001\u0000\u0000\u0000MN\u0005\u000e\u0000\u0000NO\u0005\u0006"+
+		"\u0000\u0000OP\u0003\u0000\u0000\u0000PQ\u0005\u0007\u0000\u0000QR\u0003"+
+		"\u0000\u0000\u0000RS\u0005\b\u0000\u0000ST\u0003\u0000\u0000\u0000TU\u0005"+
+		"\u000f\u0000\u0000U]\u0001\u0000\u0000\u0000VW\u0005\u000e\u0000\u0000"+
+		"WX\u0007\u0002\u0000\u0000XY\u0003\u0000\u0000\u0000YZ\u0003\u0000\u0000"+
+		"\u0000Z[\u0005\u000f\u0000\u0000[]\u0001\u0000\u0000\u0000\\F\u0001\u0000"+
+		"\u0000\u0000\\G\u0001\u0000\u0000\u0000\\H\u0001\u0000\u0000\u0000\\I"+
+		"\u0001\u0000\u0000\u0000\\M\u0001\u0000\u0000\u0000\\V\u0001\u0000\u0000"+
+		"\u0000]\u0011\u0001\u0000\u0000\u0000\u0005\u00164;C\\";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

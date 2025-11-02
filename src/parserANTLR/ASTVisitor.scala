@@ -28,6 +28,7 @@ class ASTVisitor[AST] extends PCFBaseVisitor[AST]:
     val body = visit(ctx.term()).asInstanceOf[Term]
     Fun(param, body).asInstanceOf[AST]
 
+
   override def visitApp(ctx: PCFParser.AppContext): AST =
     var result = visit(ctx.mulDiv(0)).asInstanceOf[Term]
     for i <- 1 until ctx.mulDiv().size() do
