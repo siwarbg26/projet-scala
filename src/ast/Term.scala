@@ -8,6 +8,8 @@ enum Term:
   case Let(name: String, t1: Term, t2: Term)
   case Fun(param: String, body: Term) // ← Nouveau
   case App(func: Term, arg: Term)
+  case Fix(name: String, body: Term)  // Point fixe
+
 
 enum Op:
   case Plus

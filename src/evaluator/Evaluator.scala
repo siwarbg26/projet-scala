@@ -6,20 +6,27 @@ import ast.Op.*
 
 object Evaluator:
 
+  type Env = Map[String, Value | IceCube]
+
+  case class IceCube(x: String, t: Term, e: Env)
+
   // Type de retour : peut être un entier ou une fermeture
   enum Value:
     case IntValue(n: Int)
-    case Closure(param: String, body: Term, env: Map[String, Value])
+    case Closure(param: String, body: Term, env: Env)
 
   import Value.*
 
-  def eval(term: Term, env: Map[String, Value] = Map()): Value =
+  def eval(term: Term, env: Env = Map()): Value =
     term match
       case Number(value) =>
         IntValue(value)
 
       case Var(name) =>
-        env.getOrElse(name, throw new Exception(s"Variable non définie: $name"))
+        env.getOrElse(name, throw Exception(s"Undefined variable: $name")) match
+          case v: Value => v                    // ← Valeur normale
+          case ice: IceCube =>                  // ← Glaçon trouvé
+            eval(Fix(ice.x, ice.t), ice.e)      // ← Dégel : ré-évalue le fix
 
       case BinaryTerm(op, exp1, exp2) =>
         val v1 = eval(exp1, env)
@@ -56,3 +63,7 @@ object Evaluator:
             eval(body, closureEnv + (param -> argValue))
           case _ =>
             throw new Exception("Cannot apply non-function")
+
+      case Fix(x, t) =>
+        val ice = IceCube(x, t, env) // ← Crée le glaçon
+        eval(t, env + (x -> ice)) // ← Évalue le corps avec le glaçon

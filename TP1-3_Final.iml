@@ -17,5 +17,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="scala-sdk-3.7.3" level="application" />
   </component>
 </module>
