@@ -11,8 +11,11 @@ object PCF:
   def main(args: Array[String]): Unit =
     val in: InputStream =
       if args.isEmpty then
-        val input = StdIn.readLine()
-        ByteArrayInputStream(input.getBytes())
+        // Lire jusqu'à une ligne vide
+        val lines = Iterator.continually(StdIn.readLine())
+          .takeWhile(line => line != null && line.trim.nonEmpty)
+          .mkString(" ")
+        ByteArrayInputStream(lines.getBytes())
       else
         FileInputStream(args(0))
 
