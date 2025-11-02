@@ -18,15 +18,15 @@ public interface PCFListener extends ParseTreeListener {
 	 */
 	void exitTerm(PCFParser.TermContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PCFParser#parExp}.
+	 * Enter a parse tree produced by {@link PCFParser#letExp}.
 	 * @param ctx the parse tree
 	 */
-	void enterParExp(PCFParser.ParExpContext ctx);
+	void enterLetExp(PCFParser.LetExpContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PCFParser#parExp}.
+	 * Exit a parse tree produced by {@link PCFParser#letExp}.
 	 * @param ctx the parse tree
 	 */
-	void exitParExp(PCFParser.ParExpContext ctx);
+	void exitLetExp(PCFParser.LetExpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PCFParser#ifzExp}.
 	 * @param ctx the parse tree
@@ -38,33 +38,33 @@ public interface PCFListener extends ParseTreeListener {
 	 */
 	void exitIfzExp(PCFParser.IfzExpContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PCFParser#letExp}.
+	 * Enter a parse tree produced by {@link PCFParser#addSub}.
 	 * @param ctx the parse tree
 	 */
-	void enterLetExp(PCFParser.LetExpContext ctx);
+	void enterAddSub(PCFParser.AddSubContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PCFParser#letExp}.
+	 * Exit a parse tree produced by {@link PCFParser#addSub}.
 	 * @param ctx the parse tree
 	 */
-	void exitLetExp(PCFParser.LetExpContext ctx);
+	void exitAddSub(PCFParser.AddSubContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PCFParser#prefixBinary}.
+	 * Enter a parse tree produced by {@link PCFParser#mulDiv}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrefixBinary(PCFParser.PrefixBinaryContext ctx);
+	void enterMulDiv(PCFParser.MulDivContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PCFParser#prefixBinary}.
+	 * Exit a parse tree produced by {@link PCFParser#mulDiv}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrefixBinary(PCFParser.PrefixBinaryContext ctx);
+	void exitMulDiv(PCFParser.MulDivContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PCFParser#parInfix}.
+	 * Enter a parse tree produced by {@link PCFParser#primary}.
 	 * @param ctx the parse tree
 	 */
-	void enterParInfix(PCFParser.ParInfixContext ctx);
+	void enterPrimary(PCFParser.PrimaryContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PCFParser#parInfix}.
+	 * Exit a parse tree produced by {@link PCFParser#primary}.
 	 * @param ctx the parse tree
 	 */
-	void exitParInfix(PCFParser.ParInfixContext ctx);
+	void exitPrimary(PCFParser.PrimaryContext ctx);
 }

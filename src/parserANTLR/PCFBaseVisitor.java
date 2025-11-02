@@ -25,7 +25,7 @@ public class PCFBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements PC
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParExp(PCFParser.ParExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLetExp(PCFParser.LetExpContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -39,19 +39,19 @@ public class PCFBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements PC
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLetExp(PCFParser.LetExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAddSub(PCFParser.AddSubContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPrefixBinary(PCFParser.PrefixBinaryContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMulDiv(PCFParser.MulDivContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParInfix(PCFParser.ParInfixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPrimary(PCFParser.PrimaryContext ctx) { return visitChildren(ctx); }
 }

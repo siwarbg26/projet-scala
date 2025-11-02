@@ -14,3 +14,5 @@ enum Token:
   case IN
   case IDENT(name: String)
   case EQUALS
+  case THEN 
+  case ELSE

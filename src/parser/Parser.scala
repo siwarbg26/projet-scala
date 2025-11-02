@@ -14,27 +14,55 @@ object Parser:
     currentToken = token
     parseExpr()
 
-  // Parse une expression complète (peut contenir des opérations binaires infixes)
+  // Parse une expression complète
   private def parseExpr(): Term =
-    val left = parsePrimary()
-    parseBinaryRest(left)
-
-  // Parse les opérations binaires infixes avec la bonne priorité
-  private def parseBinaryRest(left: Term): Term =
     currentToken match
-      case PLUS | MINUS | MULTIPLY | DIVIDE =>
-        val op = currentToken match
-          case PLUS => Plus
-          case MINUS => Minus
-          case MULTIPLY => Times
-          case DIVIDE => Div
-        currentToken = nextToken()
-        val right = parsePrimary()
-        val term = BinaryTerm(op, left, right)
-        parseBinaryRest(term)
-      case _ => left
+      case LET => parseLetInfix()
+      case IFZ => parseIfzInfix()
+      case _ => parseAddSub()
 
-  // Parse un terme primaire (nombre, variable, expression entre parenthèses, let)
+  // Parse un ifz en syntaxe infixe
+  private def parseIfzInfix(): Term =
+    currentToken = nextToken()
+    val cond = parseAddSub() // ← Changez parseExpr() en parseAddSub()
+
+    if currentToken != THEN then
+      throw new Exception(s"Expected 'then', got: $currentToken")
+
+    currentToken = nextToken()
+    val thenBranch = parseAddSub() // ← Changez parseExpr() en parseAddSub()
+
+    if currentToken != ELSE then
+      throw new Exception(s"Expected 'else', got: $currentToken")
+
+    currentToken = nextToken()
+    val elseBranch = parseAddSub() // ← Changez parseExpr() en parseAddSub()
+
+    IfZero(cond, thenBranch, elseBranch)
+  // Parse une expression complète (let a la priorité la plus basse)
+  
+
+  // Parse addition et soustraction (priorité basse)
+  private def parseAddSub(): Term =
+    var left = parseMulDiv()
+    while currentToken == PLUS || currentToken == MINUS do
+      val op = if currentToken == PLUS then Plus else Minus
+      currentToken = nextToken()
+      val right = parseMulDiv()
+      left = BinaryTerm(op, left, right)
+    left
+
+  // Parse multiplication et division (priorité haute)
+  private def parseMulDiv(): Term =
+    var left = parsePrimary()
+    while currentToken == MULTIPLY || currentToken == DIVIDE do
+      val op = if currentToken == MULTIPLY then Times else Div
+      currentToken = nextToken()
+      val right = parsePrimary()
+      left = BinaryTerm(op, left, right)
+    left
+
+  // Parse un terme primaire (nombre, variable, expression entre parenthèses)
   private def parsePrimary(): Term =
     currentToken match
       case NUMBER(value) =>
@@ -49,12 +77,9 @@ object Parser:
         currentToken = nextToken()
         parseParenthesized()
 
-      case LET =>
-        parseLetInfix()
-
       case _ => throw new Exception(s"Unexpected token: $currentToken")
 
-  // Parse une expression entre parenthèses (peut être préfixe ou infixe)
+  // Parse une expression entre parenthèses
   private def parseParenthesized(): Term =
     val result = currentToken match
       // Opérations binaires préfixes : (+ 1 2)
@@ -90,11 +115,11 @@ object Parser:
         val elseBranch = parseExpr()
         IfZero(cond, thenBranch, elseBranch)
 
-      // let préfixe : (let x 1 (+ x 1))
+      // let entre parenthèses : (let x = 1 in body)
       case LET =>
-        parseLetPrefix()
+        parseLetInfix()
 
-      // Expression infixe entre parenthèses : (1 + 2)
+      // Expression infixe entre parenthèses : (1 + 2) ou (x)
       case _ =>
         parseExpr()
 
@@ -122,19 +147,6 @@ object Parser:
       throw new Exception(s"Expected 'in', got: $currentToken")
 
     currentToken = nextToken()
-    val body = parseExpr()
-
-    Let(name, value, body)
-
-  // Parse un let en syntaxe préfixe : (let x 1 body)
-  private def parseLetPrefix(): Term =
-    currentToken = nextToken()
-    val name = currentToken match
-      case IDENT(id) => id
-      case _ => throw new Exception(s"Expected identifier, got: $currentToken")
-
-    currentToken = nextToken()
-    val value = parseExpr()
     val body = parseExpr()
 
     Let(name, value, body)

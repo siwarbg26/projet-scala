@@ -1,19 +1,38 @@
 grammar PCF;
 
-term : parExp
-     | NUMBER
-     | ID
+term : letExp
+     | addSub
      ;
 
-parExp : '(' (ifzExp | letExp | prefixBinary | parInfix) ')' ;
+letExp : LET ID EQUALS term IN term ;
 
-ifzExp : 'ifz' term 'then' term 'else' term ;
+ifzExp : IFZ term THEN term ELSE term ;
 
-letExp : 'let' ID '=' term 'in' term ;
+addSub : mulDiv ((PLUS | MINUS) mulDiv)* ;
 
-prefixBinary : ('+' | '-' | '*' | '/') term term ;
+mulDiv : primary ((TIMES | DIV) primary)* ;
 
-parInfix : term ('+' | '-' | '*' | '/') term ;
+primary : NUMBER
+        | ID
+        | ifzExp
+        | LPAR term RPAR
+        | LPAR IFZ term THEN term ELSE term RPAR
+        | LPAR (PLUS | MINUS | TIMES | DIV) term term RPAR
+        ;
+
+// Tokens (mots-clés avant ID)
+LET    : 'let' ;
+IN     : 'in' ;
+IFZ    : 'ifz' ;
+THEN   : 'then' ;
+ELSE   : 'else' ;
+EQUALS : '=' ;
+PLUS   : '+' ;
+MINUS  : '-' ;
+TIMES  : '*' ;
+DIV    : '/' ;
+LPAR   : '(' ;
+RPAR   : ')' ;
 
 NUMBER : [0-9]+ ;
 ID     : [a-zA-Z][a-zA-Z0-9]* ;

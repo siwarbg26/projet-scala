@@ -17,11 +17,11 @@ public interface PCFVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTerm(PCFParser.TermContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PCFParser#parExp}.
+	 * Visit a parse tree produced by {@link PCFParser#letExp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParExp(PCFParser.ParExpContext ctx);
+	T visitLetExp(PCFParser.LetExpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PCFParser#ifzExp}.
 	 * @param ctx the parse tree
@@ -29,21 +29,21 @@ public interface PCFVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfzExp(PCFParser.IfzExpContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PCFParser#letExp}.
+	 * Visit a parse tree produced by {@link PCFParser#addSub}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLetExp(PCFParser.LetExpContext ctx);
+	T visitAddSub(PCFParser.AddSubContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PCFParser#prefixBinary}.
+	 * Visit a parse tree produced by {@link PCFParser#mulDiv}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrefixBinary(PCFParser.PrefixBinaryContext ctx);
+	T visitMulDiv(PCFParser.MulDivContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PCFParser#parInfix}.
+	 * Visit a parse tree produced by {@link PCFParser#primary}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParInfix(PCFParser.ParInfixContext ctx);
+	T visitPrimary(PCFParser.PrimaryContext ctx);
 }

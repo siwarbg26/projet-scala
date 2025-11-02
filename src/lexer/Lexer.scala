@@ -42,5 +42,7 @@ object Lexer:
             case "let" => LET
             case "in" => IN
             case "ifz" => IFZ
+            case "then" => THEN
+            case "else" => ELSE
             case id => IDENT(id)
         case c => throw new Exception(s"Unexpected character: $c, ascii ${c.toInt}")
