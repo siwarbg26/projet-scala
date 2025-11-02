@@ -7,8 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="scala-sdk-3.3.6" level="application" />
-    <orderEntry type="module-library">
+    <orderEntry type="library" exported="" name="scala-sdk-3.3.6" level="application" />
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/antlr-runtime-4.13.2.jar!/" />
@@ -18,5 +18,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="scala-sdk-3.7.3" level="application" />
+    <orderEntry type="library" exported="" name="Unify" level="project" />
   </component>
 </module>
