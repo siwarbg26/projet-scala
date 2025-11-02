@@ -24,9 +24,9 @@ object Evaluator:
 
       case Var(name) =>
         env.getOrElse(name, throw Exception(s"Undefined variable: $name")) match
-          case v: Value => v                    // ← Valeur normale
-          case ice: IceCube =>                  // ← Glaçon trouvé
-            eval(Fix(ice.x, ice.t), ice.e)      // ← Dégel : ré-évalue le fix
+          case v: Value => v
+          case ice: IceCube =>
+            eval(Fix(ice.x, ice.t), ice.e)
 
       case BinaryTerm(op, exp1, exp2) =>
         val v1 = eval(exp1, env)

@@ -14,9 +14,6 @@ object Parser:
     currentToken = token
     parseExpr()
 
-  // ══════════════════════════════════════════════════════
-  // Parse une expression complète
-  // ══════════════════════════════════════════════════════
   private def parseExpr(): Term =
     currentToken match
       case LET => parseLetInfix()
@@ -25,14 +22,11 @@ object Parser:
       case IFZ => parseIfzInfix()
       case _ => parseApp()
 
-  // ══════════════════════════════════════════════════════
-  // Parse une valeur de let (s'arrête à 'in')
-  // ══════════════════════════════════════════════════════
   private def parseLetValue(): Term =
     currentToken match
       case FUN => parseFunBody()
       case FIX => parseFixBody()
-      case IFZ => parseIfzBody()  // ← Changement ici
+      case IFZ => parseIfzBody()
       case _ => parseMulDiv()
 
   private def parseFix(): Term =
