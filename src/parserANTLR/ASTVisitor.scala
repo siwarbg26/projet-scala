@@ -17,7 +17,7 @@ class ASTVisitor[AST] extends PCFBaseVisitor[AST]:
       visit(ctx.letExp())
     else if ctx.funExp() != null then
       visit(ctx.funExp())
-    else if ctx.fixExp() != null then // ← Ajoutez cette condition
+    else if ctx.fixExp() != null then
       visit(ctx.fixExp())
     else
       visit(ctx.addSub())

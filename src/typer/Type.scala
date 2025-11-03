@@ -43,7 +43,6 @@ object Test extends App :
   v3 === INT
   println(s"a1 = $a1")
   println(s"a2 = $a2")
-  // example of X === A where X appears in A
   val v5 = TVar()
   val a5 = FUNCTION(v5, v5)
   val result = v5 === a5

@@ -6,9 +6,9 @@ enum Term:
   case BinaryTerm(op: Op, exp1: Term, exp2: Term)
   case Var(name: String)
   case Let(name: String, t1: Term, t2: Term)
-  case Fun(param: String, body: Term) // ← Nouveau
+  case Fun(param: String, body: Term)
   case App(func: Term, arg: Term)
-  case Fix(name: String, body: Term)  // Point fixe
+  case Fix(name: String, body: Term)
 
 
 enum Op:

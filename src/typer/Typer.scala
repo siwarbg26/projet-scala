@@ -25,7 +25,7 @@ object Typer :
       val v1 = eval(term1, e)
       val v2 = eval(term2, e)
       if v1 === INT && v2 === INT then
-        INT  // ✓ Changez v1 en INT
+        INT  
       else
         throw TyperException("V1 or v2 are not an int")
 
